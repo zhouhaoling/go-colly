@@ -1,0 +1,101 @@
+body{
+  background: url(/assets/img/background_log.jpg) no-repeat;
+  background-size: 200% 200%;
+}
+
+#zg{                
+  position:relative;             
+  width:400px;       
+  border-radius:10px;      
+  height:350px;  
+  margin: auto;
+  margin-top: 150px;
+  background-color: rgb(148, 203, 224);           
+}    
+#logindiv{                
+  position:absolute;             
+  width:350px;            
+  height:300px;             
+  left:50%;             
+  top:50%;   
+  border-radius:10px;          
+  margin-left:-175px;               
+  margin-top:-150px;       
+  background:white;       
+  text-align: center;
+}  
+#title{
+  color: darkcyan;
+
+}
+#title,
+#username,
+#password,
+#vcode,
+#autologin,
+#btlogin
+{
+
+  margin:10px 0;
+}
+#autologin{
+  font-size: 10px;
+}
+.wrong{
+  text-indent:-150px;
+ font-size: 10px;
+  color: red;
+}
+#cw,#cw1{
+  height: 5px;
+}
+#username {
+  text-indent: 16px;
+  height:30px;
+  width:250px;
+  border:1px soild rgba(212, 212, 211, 0.986);
+}
+#password{
+  text-indent: 16px;
+  height:30px;
+  border:1px soild rgba(212, 212, 211, 0.986);
+  width:250px;
+}
+#vcode{
+  text-indent: 16px;
+  height:30px;
+  width:200px;
+  border:1px soild rgba(212, 212, 211, 0.986);
+
+}
+#code{
+  background-image: url(../img/验证码.png);
+  width: 100px;
+  height:30px;
+}
+#btlogin input{
+  width:250px;
+  background-color: blue;
+  color:white;
+  letter-spacing:2px;
+  font-weight: bold;
+  height: 30px;
+  border-radius:10px; 
+}
+#pro{
+  margin: auto;
+  width: 250px;
+}
+#lo{
+  float: left;
+  font-size: 15px;
+  color:cornflowerblue;   
+} 
+#zc{
+  float: right;
+  color: darkviolet;
+  font-size: 15px;
+}
+a{
+  text-decoration: none;
+}

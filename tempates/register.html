@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>注册页</title>
+  <link rel="stylesheet" href="../assets/bootstrap-3.4.1-dist/css/bootstrap.min.css">
+  <script src="../assets/js/jquery-3.3.1.min.js"></script>
+  <script src="../assets/bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
+  <script src="../assets/js/register.js"></script>
+</head>
+<style>
+  .login-block {
+    position: absolute;
+    top: 50%;
+    transform:  translateY(-50%);
+  }
+  body{
+    background:url(../assets/img/background_log.jpg) no-repeat center;
+    background-position: center 0;
+    background-size: cover;
+    margin: 0px;
+  }
+  h3{
+    text-align: center;
+    padding-bottom:20px;
+    font-family:Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 40px;
+  }
+  button{
+    width: 80px;
+    height: 40px;
+    font-size: 20px;
+  }
+  #cw,#cw1,#cw2{
+      height: 5px;
+      margin: auto;
+    } 
+  #msg{
+    height: 20px;
+    margin: auto;
+    text-indent:-150px;
+    font-size: 10px;
+    color: red;
+  }
+  .wrong{
+      text-indent:-150px;
+      font-size: 10px;
+      color: red;
+    }
+</style>
+
+<body>
+<div>
+
+  <form action="/register" method="post" >
+    <div class="col-md-4 col-lg-4 col-lg-offset-4 col-md-offset-4 login-block" style="background-color: white; opacity: 0.8; padding: 50px; border-radius: 15px">
+      <h3>用户注册</h3>
+      <div style=" height: 20px;">
+        <span id="msg">{{.}}</span>
+      </div>
+      <br>
+      <div class="form-group input-group input-group-lg" >
+        <span class="input-group-addon"  >用户名&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <input type="text" name="username" id="username" class="form-control" placeholder="用户名" onblur="checkname()">
+      </div>
+
+      <div class="form-group input-group input-group-lg">
+        <span id="cw"></span>
+      </div>
+      <div class="form-group input-group input-group-lg" >
+        <span class="input-group-addon" >密码&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <input type="password" name="password" id="pass1" class="form-control" placeholder="密码" onblur="checkpass()">
+      </div>
+
+      <div class="form-group input-group input-group-lg">
+        <span id="cw1"></span>
+      </div>
+
+      <div class="form-group input-group input-group-lg">
+        <span class="input-group-addon" id="passwords" >确认密码</span>
+        <input type="password" name="passwords" id="pass2" class="form-control" placeholder="确认密码">
+      </div>
+
+      <div class="form-group input-group input-group-lg">
+        <span id="cw2"></span>
+      </div>
+
+      <div class="form-group center-block">
+        <button type="submit" class="btn btn-success center-block" id="sub_btn">注 册</button>
+        <a href="login">已有账户？点击登录</a>
+      </div>
+
+    </div>
+  </form>
+</div>
+</body>
+<script type="text/javascript">
+  $(function() {
+    $("#sub_btn").click(function() {
+        //获取用户输入的用户名、密码、确认密码
+        var username = $("#username").val()
+        if(username == ""){
+          alert("用户名不能为空")
+          return false;
+        }
+
+        var password = $("#pass1").val()
+        var reg = /^[0-9a-zA-Z_-]{6,12}$/;
+        if(!reg.test(password)){
+          alert("请输入6-12位的字母、数字、下划线或减号的密码！")
+				  return false;
+        }
+        //获取用户输入的确认密码
+			  var repwd = $("#pass2").val();
+			  if(repwd == ""){
+				  alert("确认密码不能为空！");
+				  return false;
+			  }
+			  //判断两次输入的密码是否一致
+			  if(repwd != password){
+				  //将确认密码清空，即将确认密码密码框中的value属性设置为空
+				  $("#pass2").val("");
+				  alert("两次输入的密码不一致！");
+				  return false;
+			  }
+    })
+
+    $("#msg").hide()
+    $("#username").change(function () {
+      // alert("hhh");
+      var username = $(this).val();
+      var url = "/checkUserName";
+      var param = {"username":username}
+      $.post(url, param, function (res) {
+        $("#msg").show();
+        $("#msg").html(res);
+        if (res == "<font style='color:red'>用户名已存在!</font>"){
+          $("#username").val("");
+        }
+      });
+    });
+  });  
+</script>
+</html>
+
